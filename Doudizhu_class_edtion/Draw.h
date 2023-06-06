@@ -8,8 +8,7 @@
 #include<stdio.h>
 #include<cstdlib>
 #include<stdlib.h>
-#include "Ai.h"
-#include "Human.h"
+
 
 void HideCursor();
 void gotoxy(unsigned char x, unsigned char y);
@@ -47,7 +46,7 @@ public:
 	void log_in();
 	int basic_choose_button(int orign_arrow,int buttons_number, int buttons_distance, int first_button_x, int first_button_y);
 
-	int choose_if_landlord(Ai ai_1, Ai ai_2, int choosen_player,int card_y, int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction = 1);
+//	int choose_if_landlord(Ai ai_1, Ai ai_2, int choosen_player,int card_y, int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction = 1);
 
 	void print_handcard_updown(int card_y, int card_num, int* card, int* card_up_no_matrix);
 
@@ -56,7 +55,7 @@ public:
 	void print_ai_card_right(int right_card_num);
 	void Landlord_Card_Creat(int* card);
 
-	int endgame(Human human, Ai ai_1, Ai ai_2);
+	//int endgame(Human human, Ai ai_1, Ai ai_2);
 
 
 };

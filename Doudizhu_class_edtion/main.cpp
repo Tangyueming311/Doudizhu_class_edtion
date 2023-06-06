@@ -6,12 +6,14 @@
 #include "Card.h"
 #include "Human.h"
 #include "Ai.h"
+#include "Function.h"
 using namespace std;
 int main()
 {
 
 	setConsoleFontSize(24);
 	HideCursor();
+
 
 	Card card;
 	card.card();
@@ -31,17 +33,19 @@ int main()
 	Sleep(1000);
 	Draw draw;
 	draw.menu();
+	Human human;
+
+	Function function;
 
 	//随机数
 	srand((unsigned)time(NULL));
 	int choosen_num = rand() % 3+1;
 
-	int landlord = draw.choose_if_landlord(ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
+	int landlord = function.choose_if_landlord(draw,ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
 	card.set_lord_card(landlord);
 	
 
-	Human human;
-
+	
 	human.set_handcards(card.matrix_part1());
 	ai_1.set_handcards(card.matrix_part2_);
 	ai_2.set_handcards(card.matrix_part3_);
@@ -63,7 +67,7 @@ int main()
 			}
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -78,7 +82,7 @@ int main()
 			}
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -94,7 +98,7 @@ int main()
 			Sleep(1000);
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -112,7 +116,7 @@ int main()
 
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -131,7 +135,7 @@ int main()
 
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -150,7 +154,7 @@ int main()
 
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 		}
@@ -166,7 +170,7 @@ int main()
 			}
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -185,7 +189,7 @@ int main()
 			Sleep(1000);
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -200,7 +204,7 @@ int main()
 			
 
 
-			if (draw.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(human, ai_1, ai_2) != 0) {
 				break;
 			}
               Sleep(1000);
@@ -212,22 +216,22 @@ int main()
 	}
 
 
-	if (draw.endgame(human, ai_1, ai_2) == 1&&landlord==1) {
+	if (function.endgame(human, ai_1, ai_2) == 1&&landlord==1) {
 		cout << "地主赢力";
 	}
-	else if (draw.endgame(human, ai_1, ai_2) == 1 && landlord != 1) {
+	else if (function.endgame(human, ai_1, ai_2) == 1 && landlord != 1) {
 		cout << " 农民赢力";
 	}
-	else if (draw.endgame(human, ai_1, ai_2) == 2 && landlord == 2) {
+	else if (function.endgame(human, ai_1, ai_2) == 2 && landlord == 2) {
 		cout << " 农民赢力";
 	}
-	else if (draw.endgame(human, ai_1, ai_2) == 2 && landlord != 2) {
+	else if (function.endgame(human, ai_1, ai_2) == 2 && landlord != 2) {
 		cout << " 农民赢力";
 	}
-	else if (draw.endgame(human, ai_1, ai_2) == 3 && landlord == 3) {
+	else if (function.endgame(human, ai_1, ai_2) == 3 && landlord == 3) {
 		cout << " 农民赢力";
 	}
-	else if (draw.endgame(human, ai_1, ai_2) == 3 && landlord != 3) {
+	else if (function.endgame(human, ai_1, ai_2) == 3 && landlord != 3) {
 		cout << " 农民赢力";
 	}
 

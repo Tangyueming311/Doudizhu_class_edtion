@@ -1,7 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include<vector>
-
+#include "Draw.h"
+#include "Card.h"
 
 extern int K_temp_card[15];
 extern int K_order;

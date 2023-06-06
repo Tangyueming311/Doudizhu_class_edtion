@@ -1,7 +1,13 @@
-#include "Draw.h"
-#include "Player.h"
-#include "Card.h"
 
+#include "Card.h"
+#include<iostream>
+#include<string>
+#include<Windows.h>
+#include <conio.h>
+#include<iomanip>
+#include<stdio.h>
+#include<cstdlib>
+#include<stdlib.h>
 
 void Card::card() {
 	int p1[54] = { 3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,15,16,17 };

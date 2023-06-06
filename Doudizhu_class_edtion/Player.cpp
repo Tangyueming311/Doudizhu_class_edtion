@@ -1,6 +1,6 @@
-#include "Draw.h"
+
 #include "Player.h"
-#include "Card.h"
+
 
 int K_temp_card[15] = { 0 };
 int K_order = 0;
@@ -1461,14 +1461,6 @@ bool Player::first_chu_judge_matrix(int* chucards)
 
 	
 }
-
-
-
-
-
-
-
-
 
 bool Player::follow_chu_judge_matrix(int* chucards, int* temp_cards, int temp_card_class) {
 
