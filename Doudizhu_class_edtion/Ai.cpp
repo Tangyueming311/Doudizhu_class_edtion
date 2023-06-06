@@ -12,6 +12,7 @@ void Ai::chu_card(Draw draw) {
 
 	// 用此函数判断是否能出  follow_chu_judge_matrix()
 
+
 	if (chu_or_buchu == 1) {
 		//在牌局中间打印出将打的牌
 		for (int i = 0; i < 15; i++) {
