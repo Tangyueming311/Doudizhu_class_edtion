@@ -1,5 +1,6 @@
 #ifndef CARD_H
 #define CARD_H
+#include "Draw.h"
 class Card
 {
 public:
@@ -17,6 +18,7 @@ public:
 	int landlord_[3] = { 0 };
 	int orign_card_[54] = { 0 };
 
+	int orign_card_matrix[15] = { 4,4,4,4,4,4,4,4,4,4,4,4,4,2,2 };
 
 	void card();     
 		
@@ -36,7 +38,9 @@ public:
 
     void set_lord_card(int num);
 
-
+	
+	void mark_card_change(int* K_temp_card);
+	void mark_card_print(int MapLength, int MapHeight,int*orign_card);
 
 
 };

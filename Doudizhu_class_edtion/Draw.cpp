@@ -174,7 +174,7 @@ void Draw::basic_print_handcard(int card_y, int card_num, int* card)
 
 int Draw::menu()
 {
-                                                          system("cls");
+                                                          clean_the_map();
 
 
 	int title_x = MapLength / 2 - 3;
@@ -216,7 +216,7 @@ int Draw::menu()
 
 
 
-	                                                         system("cls");
+	                                                         clean_the_map();
 
 
 
@@ -373,18 +373,18 @@ int Draw::menu()
 
 
 		else if (keyborad_input == 13 && point_key == 2) {
-			system("cls");
+			clean_the_map();
 			return 2;
 			
 			break;
 		}
 
 		else if (keyborad_input == 13 && point_key == 4) {
-			                                                           system("cls");
+			                                                           clean_the_map();
 			exit(100);
 		}
 		else if (keyborad_input == 13 && point_key == 1) {
-			                                                          system("cls");
+			                                                          clean_the_map();
 			return 1;
 			break;
 		}
@@ -500,11 +500,11 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 
 //int Draw::choose_if_landlord(Ai ai_1,Ai ai_2,int choosen_player,int card_y , int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction)
 //{
-//	                                             system("cls");
+//	                                             clean_the_map();
 //    gotoxy(MapLength / 2, 20);
 //	cout << "洗牌中，请稍后：";
 //	Sleep(1000);
-//	                                            system("cls");
+//	                                            clean_the_map();
 //	gotoxy(MapLength / 2, 20);
 //	cout << "你的手牌如下：";
 //	basic_print_handcard(card_y, card_num, card);
@@ -568,7 +568,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //				cout << "再抢！  ";
 //
 //				Sleep(2000);
-//				system("cls");
+//				clean_the_map();
 //				return 1;
 //			}
 //			else {
@@ -581,7 +581,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //					cout << "地主是2号ai！";
 //
 //					Sleep(2000);
-//					system("cls");
+//					clean_the_map();
 //					return 3;
 //				}
 //				
@@ -589,7 +589,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //					gotoxy(MapLength / 2, MapHeight/2+14);
 //					cout << "地主是1号ai！";
 //					Sleep(2000);
-//					system("cls");
+//					clean_the_map();
 //					return 2;
 //				}
 //
@@ -601,7 +601,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //			cout << "地主是你！";
 //
 //			Sleep(2000);
-//			system("cls");
+//			clean_the_map();
 //			return 1;
 //		}
 //
@@ -668,7 +668,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //				cout << "地主是1号ai！";
 //
 //				Sleep(2000);
-//				system("cls");
+//				clean_the_map();
 //				return 2;
 //			}
 //			else {
@@ -678,7 +678,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //					gotoxy(MapLength / 2, MapHeight/2+14);
 //					cout << "地主是你！";
 //					Sleep(2000);
-//					system("cls");
+//					clean_the_map();
 //
 //					return 1;
 //				}
@@ -686,7 +686,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //					gotoxy(MapLength / 2, MapHeight/2+14);
 //					cout << "地主是2号ai！";
 //					Sleep(2000);
-//					system("cls");
+//					clean_the_map();
 //					return 3;
 //				}
 //			}
@@ -696,7 +696,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //			gotoxy(MapLength / 2, MapHeight/2+14);
 //			cout << "地主是1号ai！";
 //			Sleep(2000);
-//			system("cls");
+//			clean_the_map();
 //			return 2;
 //		}
 //		
@@ -760,7 +760,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //				gotoxy(MapLength / 2, MapHeight/2+14);
 //				cout << "地主是2号ai！";
 //				Sleep(2000);
-//				system("cls");
+//				clean_the_map();
 //				return 3;
 //			}
 //			else {
@@ -772,14 +772,14 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //					gotoxy(MapLength / 2, MapHeight/2+14);
 //					cout << "地主是你！";
 //					Sleep(2000);
-//					system("cls");
+//					clean_the_map();
 //					return 1;
 //				}
 //				else { 
 //					gotoxy(MapLength / 2, MapHeight/2+14);
 //					cout << "地主是1号ai！";
 //					Sleep(2000);
-//					system("cls");
+//					clean_the_map();
 //					return 2;
 //				}
 //			}
@@ -789,7 +789,7 @@ int Draw::basic_choose_button(int orign_arrow,int buttons_number,int buttons_dis
 //			gotoxy(MapLength / 2, MapHeight/2+14);
 //			cout << "地主是2号ai！";
 //			Sleep(2000);
-//			system("cls");
+//			clean_the_map();
 //			return 3;
 //		}
 //		
@@ -1132,21 +1132,32 @@ void Draw::Landlord_Card_Creat(int* card) {
 
 }
 
+void Draw::clean_the_map()
+{
+	for (int i = 0; i < MapLength; i++) {
+		for (int j = 0; j < MapHeight; j++) {
+			map_matrix_[i][j] = '0';
+			gotoxy(i, j);
+			putchar(' ');
+		}
+	}
+}
+
 //
 //int Draw::endgame(Human human, Ai ai_1, Ai ai_2) {
 //	if (human.card_num(human.handcards_) == 0) {
 //
-//		                                            system("cls");
+//		                                            clean_the_map();
 //		return 1;
 //
 //	}
 //	else if (ai_1.card_num(ai_1.handcards_) == 0) {
-//		                                       system("cls");
+//		                                       clean_the_map();
 //		return 2;
 //
 //	}
 //	else if (ai_2.card_num(ai_2.handcards_) == 0) {
-//		                                         system("cls");
+//		                                         clean_the_map();
 //		return 3;
 //
 //	}

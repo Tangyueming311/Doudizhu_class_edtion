@@ -8,13 +8,11 @@ class Human :
     
 {
 public:
-    //地主牌是三个元素的数组
-    void choose_landord(bool if_human_landlord, int* landlord_card);
+ 
+
+
 
     void chu_card(Draw draw);
-
-
-    
     void chu_card_first(Draw draw);
 
     

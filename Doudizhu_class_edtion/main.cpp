@@ -37,11 +37,20 @@ int main()
 
 	Function function;
 
+	int unknow = 0;
+	human.set_happy_beans(unknow);
+	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, human.happy_beans_);
+
+
+
 	//随机数
 	srand((unsigned)time(NULL));
 	int choosen_num = rand() % 3+1;
 
-	int landlord = function.choose_if_landlord(draw,ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
+	int a[1] = { 1 };
+
+	int landlord = function.choose_if_landlord(human,a,draw,ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
+	human.set_happy_numbers(a[0]);
 	card.set_lord_card(landlord);
 	
 
@@ -51,8 +60,23 @@ int main()
 	ai_2.set_handcards(card.matrix_part3_);
 
 	draw.Landlord_Card_Creat(card.landlord_);
-	draw.print_ai_card(ai_1.card_num(ai_1.handcards_), ai_2.card_num(ai_2.handcards_), 1);
+	draw.print_ai_card(ai_1.card_num(ai_1.handcards_), ai_2.card_num(ai_2.handcards_), landlord);
 	draw.basic_print_handcard(draw.MapHeight - 10, human.card_num(human.handcards_), human.handcards_);
+
+
+	int orign_card[15] = { 0 };
+	for (int i = 0; i < 15; i++) {
+		orign_card[i] = card.orign_card_matrix[i];
+		orign_card[i] = orign_card[i] - human.handcards_[i];
+	}
+	card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+
+
+	///
+	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, human.happy_beans_);
+
+
+
 
 	//游戏进程
 	while (1) {
@@ -66,8 +90,10 @@ int main()
 				human.chu_card_first(draw);
 			}
 
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -80,9 +106,10 @@ int main()
 
 				ai_1.chu_card_first(draw);
 			}
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 
-
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -95,10 +122,12 @@ int main()
 
 				ai_2.chu_card_first(draw);
 			}
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 			Sleep(1000);
 
 
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -114,9 +143,10 @@ int main()
 				ai_1.chu_card_first(draw);
 			}
 
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 
-
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -130,12 +160,15 @@ int main()
 
 				ai_2.chu_card_first(draw);
 			}
+
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 			Sleep(1000);
 
 
 
 
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -149,12 +182,13 @@ int main()
 
 				human.chu_card_first(draw);
 			}
-
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 			Sleep(1000);
 
 
 
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 		}
@@ -169,8 +203,9 @@ int main()
 				ai_2.chu_card_first(draw);
 			}
 
-
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -185,11 +220,12 @@ int main()
 
 				human.chu_card_first(draw);
 			}
-
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 			Sleep(1000);
 
 
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
@@ -202,9 +238,10 @@ int main()
 				ai_1.chu_card_first(draw);
 			}
 			
+			card.mark_card_change(K_temp_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
 
-
-			if (function.endgame(human, ai_1, ai_2) != 0) {
+			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
               Sleep(1000);
@@ -216,25 +253,27 @@ int main()
 	}
 
 
-	if (function.endgame(human, ai_1, ai_2) == 1&&landlord==1) {
+	if (function.endgame(draw,human, ai_1, ai_2) == 1&&landlord==1) {
 		cout << "地主赢力";
 	}
-	else if (function.endgame(human, ai_1, ai_2) == 1 && landlord != 1) {
+	else if (function.endgame(draw, human, ai_1, ai_2) == 1 && landlord != 1) {
 		cout << " 农民赢力";
 	}
-	else if (function.endgame(human, ai_1, ai_2) == 2 && landlord == 2) {
+	else if (function.endgame(draw, human, ai_1, ai_2) == 2 && landlord == 2) {
 		cout << " 农民赢力";
 	}
-	else if (function.endgame(human, ai_1, ai_2) == 2 && landlord != 2) {
+	else if (function.endgame(draw, human, ai_1, ai_2) == 2 && landlord != 2) {
 		cout << " 农民赢力";
 	}
-	else if (function.endgame(human, ai_1, ai_2) == 3 && landlord == 3) {
+	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord == 3) {
 		cout << " 农民赢力";
 	}
-	else if (function.endgame(human, ai_1, ai_2) == 3 && landlord != 3) {
+	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord != 3) {
 		cout << " 农民赢力";
 	}
 
+
+	//human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw,human, ai_1, ai_2), landlord);
 
 	//测试
 

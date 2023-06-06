@@ -1,9 +1,9 @@
 
 #include "Player.h"
-
+using namespace std;
 
 int K_temp_card[15] = { 0 };
-int K_order = 0;
+int K_order = 2;
 
 void Player::set_handcards(int* handcards)
 {
@@ -40,6 +40,19 @@ bool Player::if_lord()
 {
 	return if_lord_;
 }
+
+void Player::set_happy_beans(int happy_beans)
+{
+	happy_beans_ = happy_beans;
+	happy_numbers_ = 1;
+}
+
+void Player::set_happy_numbers(int a)
+{
+	
+	happy_numbers_ = a;
+}
+
 
 void Player::set_order_of_play(int order_of_play)
 {
@@ -112,8 +125,13 @@ int Player::first_chu_judge(int* a) {
 			//		cout << "你打出了对牌\n";
 			return 1;
 		}
-		else {
+		else if(a[0]==16&&a[1]==17) {
 			//		cout << "出牌不符合规范" << endl;
+			double_happy_numbers();
+			double_happy_numbers();
+			return 1;
+		}
+		else {
 			return 0;
 		}
 	}
@@ -133,7 +151,7 @@ int Player::first_chu_judge(int* a) {
 	else if (num == 4) {
 		if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) {
 			temp_card_class_ = 1;         //暂存值的牌的类型为炸弹	
-
+			double_happy_numbers();
 			//		cout << "你直接打出了炸弹！!!!\n";
 			return 1;
 		}
@@ -718,6 +736,7 @@ int Player::follow_chu_judge(int* a, int* b, int c)
 		if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3] && b[0] != 16 && b[1] != 17) {
 
 			//			cout << "炸弹压死！！！！" << endl;
+			double_happy_numbers();
 			return 1;
 		}
 		else {
@@ -730,6 +749,8 @@ int Player::follow_chu_judge(int* a, int* b, int c)
 		if (a[0] == 16 && a[1] == 17) {
 
 			//			cout << "王炸绝杀！！！！！"<<endl;
+			double_happy_numbers();
+			double_happy_numbers();
 			return 1;
 		}
 		else {
@@ -1371,6 +1392,7 @@ int Player::follow_chu_judge_plane1(int* a, int* b) {
 int Player::follow_chu_judge_BoomCard(int* a, int* b) {
 	if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) {
 		if (a[0] > b[0]) {
+			double_happy_numbers();
 			return 1;
 		}
 		else {
@@ -1513,6 +1535,48 @@ bool Player::follow_chu_judge_matrix(int* chucards, int* temp_cards, int temp_ca
 
 
 
+void Player::double_happy_numbers()
+{
+	happy_numbers_ = happy_numbers_ * 2;
+}
 
+void Player::print_happy_numbers_and_beans(int MapLength, int MapHeight, int happy_numbers, int happy_beans)
+{
+	gotoxy(MapLength / 2 - 18, MapHeight+2);
+	cout << "【当前倍数】：" << happy_numbers;
+
+	gotoxy(MapLength / 2 + 15, MapHeight+2);
+	cout << "【欢乐豆余额】：" << happy_beans;
+
+
+}
+
+void Player::evaluate_happy_beans(int happy_numbers, int happy_beans, int winner, int landlord)
+{
+	int change_happy_beans = 0;
+	if (landlord == 1 && winner == 1) {
+		change_happy_beans = 5 * 2 * happy_numbers;
+	}
+	else if (landlord == 1 && winner != 1) {
+		change_happy_beans = -5 * 2 * happy_numbers;
+	}
+	else if (landlord != 1 && winner == 1) {
+		change_happy_beans = 5 * happy_numbers;
+	}
+	else if (landlord != 1 && winner != 1) {
+		change_happy_beans = -5 * happy_numbers;
+	}
+
+	if ((change_happy_beans + happy_beans) < 0) {
+		happy_beans = 0;
+	}
+	else {
+		happy_beans = happy_beans + change_happy_beans;
+	}
+
+
+	cout << change_happy_beans << "  " << "欢乐豆余额" << happy_beans;
+
+}
 
 

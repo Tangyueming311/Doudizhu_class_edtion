@@ -1,6 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include<vector>
+
 #include "Draw.h"
 #include "Card.h"
 
@@ -16,6 +16,14 @@ public:
 	 bool if_lord_;
 	 int order_of_play_;
 	 int temp_card_class_;
+
+	 int happy_beans_ ;
+	 int happy_numbers_ ;
+	 void double_happy_numbers();
+	 void evaluate_happy_beans(int happy_numbers, int happy_beans, int winner, int landlord);
+	 void print_happy_numbers_and_beans(int MapLength, int MapHeight, int happy_numbers, int happy_beans);
+	 void set_happy_beans(int happy_beans);
+	 void set_happy_numbers(int a);
 
 
 	 int card_num(int* card);

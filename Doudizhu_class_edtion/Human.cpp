@@ -1,21 +1,5 @@
 #include "Human.h"
 using namespace std;
-void Human::choose_landord(bool if_human_landlord,int * landlord_card)
-{
-	int temp_handcards_[15];
-	for (int i = 0; i < 15; i++) {
-		temp_handcards_[i] = Human::handcards()[i];
-	}
-
-	if (if_human_landlord == 1) {
-		for (int i = 0; i < 3; i++) {
-			temp_handcards_[landlord_card[i]-3]++;
-		}
-		Human::set_handcards(temp_handcards_);
-	}
-
-
-}
 
 
 
@@ -236,3 +220,5 @@ void Human::chu_card_first(Draw draw) {
 	
 
 }
+
+

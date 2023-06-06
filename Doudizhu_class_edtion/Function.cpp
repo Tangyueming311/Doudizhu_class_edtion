@@ -5,21 +5,21 @@
 using namespace std;
 
 
-int Function::endgame(Human human, Ai ai_1, Ai ai_2)
+int Function::endgame(Draw draw ,Human human, Ai ai_1, Ai ai_2)
 {
 	if (human.card_num(human.handcards_) == 0) {
 
-		system("cls");
+		draw.clean_the_map();
 		return 1;
 
 	}
 	else if (ai_1.card_num(ai_1.handcards_) == 0) {
-		system("cls");
+		draw.clean_the_map();
 		return 2;
 
 	}
 	else if (ai_2.card_num(ai_2.handcards_) == 0) {
-		system("cls");
+		draw.clean_the_map();
 		return 3;
 
 	}
@@ -27,13 +27,13 @@ int Function::endgame(Human human, Ai ai_1, Ai ai_2)
 		return 0;
 	}
 }
-int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player, int card_y, int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction)
+int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_2, int choosen_player, int card_y, int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction)
 {
-	system("cls");
+	draw.clean_the_map();
 	gotoxy(draw.MapLength / 2, 20);
 	cout << "洗牌中，请稍后：";
 	Sleep(1000);
-	system("cls");
+	draw.clean_the_map();
 	gotoxy(draw.MapLength / 2, 20);
 	cout << "你的手牌如下：";
 	draw.basic_print_handcard(card_y, card_num, card);
@@ -53,6 +53,11 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 		if (draw.basic_choose_button(orign_arrow, buttons_number, buttons_distance, first_button_x, first_button_y) == 1) {
 			gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 18);
 			cout << "叫地主！";
+			
+			a[0] = a[0] * 2;	
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 			landlord_player_1 = 1;
 		}
 		else {
@@ -66,6 +71,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			landlord_player_2 = 1;
 			gotoxy(20, 20);
 			cout << "Ai 1：抢地主！";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 		}
 		else {
 			landlord_player_2 = 0;
@@ -77,6 +86,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			landlord_player_3 = 1;
 			gotoxy(draw.MapLength - 20, 20);
 			cout << "Ai 2：抢地主！";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 		}
 		else {
 			landlord_player_3 = 0;
@@ -95,9 +108,12 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 
 				gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 18);
 				cout << "再抢！  ";
+				a[0] = a[0] * 2;
+				human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
 
 				Sleep(2000);
-				system("cls");
+				draw.clean_the_map();
 				return 1;
 			}
 			else {
@@ -110,7 +126,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 					cout << "地主是2号ai！";
 
 					Sleep(2000);
-					system("cls");
+					draw.clean_the_map();
 					return 3;
 				}
 
@@ -118,7 +134,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 					gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 					cout << "地主是1号ai！";
 					Sleep(2000);
-					system("cls");
+					draw.clean_the_map();
 					return 2;
 				}
 
@@ -130,7 +146,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			cout << "地主是你！";
 
 			Sleep(2000);
-			system("cls");
+			draw.clean_the_map();
 			return 1;
 		}
 
@@ -148,6 +164,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			landlord_player_2 = 1;
 			gotoxy(20, 20);
 			cout << "Ai 1：叫地主！";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 		}
 		else {
 			landlord_player_2 = 0;
@@ -160,6 +180,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			landlord_player_3 = 1;
 			gotoxy(draw.MapLength - 20, 20);
 			cout << "Ai 2：抢地主！";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 		}
 		else {
 			landlord_player_3 = 0;
@@ -177,6 +201,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 
 			gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 18);
 			cout << "抢地主！  ";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 			landlord_player_1 = 1;
 		}
 		else {
@@ -193,11 +221,15 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			if (ai_1.choose_landord() == true) {
 				gotoxy(20, 20);
 				cout << "Ai 1：再抢！  ";
+				a[0] = a[0] * 2;
+				human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 				gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 				cout << "地主是1号ai！";
 
 				Sleep(2000);
-				system("cls");
+				draw.clean_the_map();
 				return 2;
 			}
 			else {
@@ -207,7 +239,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 					gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 					cout << "地主是你！";
 					Sleep(2000);
-					system("cls");
+					draw.clean_the_map();
 
 					return 1;
 				}
@@ -215,7 +247,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 					gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 					cout << "地主是2号ai！";
 					Sleep(2000);
-					system("cls");
+					draw.clean_the_map();
 					return 3;
 				}
 			}
@@ -225,7 +257,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 			cout << "地主是1号ai！";
 			Sleep(2000);
-			system("cls");
+			draw.clean_the_map();
 			return 2;
 		}
 
@@ -237,6 +269,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			landlord_player_3 = 1;
 			gotoxy(draw.MapLength - 20, 20);
 			cout << "Ai 2：叫地主！";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 		}
 		else {
 			landlord_player_3 = 0;
@@ -253,6 +289,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 		if (draw.basic_choose_button(orign_arrow, buttons_number, buttons_distance, first_button_x, first_button_y) == 1) {
 			gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 18);
 			cout << "抢地主！  ";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 			landlord_player_1 = 1;
 		}
 		else {
@@ -266,6 +306,10 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			landlord_player_2 = 1;
 			gotoxy(20, 20);
 			cout << "Ai 1：抢地主！";
+			a[0] = a[0] * 2;
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
+
 		}
 		else {
 			landlord_player_2 = 0;
@@ -285,11 +329,14 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			if (ai_2.choose_landord() == true) {
 				gotoxy(draw.MapLength - 20, 20);
 				cout << "Ai 2：再抢！   ";
+				a[0] = a[0] * 2;
+				human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, a[0], human.happy_beans_);
+
 
 				gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 				cout << "地主是2号ai！";
 				Sleep(2000);
-				system("cls");
+				draw.clean_the_map();
 				return 3;
 			}
 			else {
@@ -301,14 +348,14 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 					gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 					cout << "地主是你！";
 					Sleep(2000);
-					system("cls");
+					draw.clean_the_map();
 					return 1;
 				}
 				else {
 					gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 					cout << "地主是1号ai！";
 					Sleep(2000);
-					system("cls");
+					draw.clean_the_map();
 					return 2;
 				}
 			}
@@ -318,7 +365,7 @@ int Function::choose_if_landlord(Draw draw, Ai ai_1, Ai ai_2, int choosen_player
 			gotoxy(draw.MapLength / 2, draw.MapHeight / 2 + 14);
 			cout << "地主是2号ai！";
 			Sleep(2000);
-			system("cls");
+			draw.clean_the_map();
 			return 3;
 		}
 

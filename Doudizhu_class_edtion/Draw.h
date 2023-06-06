@@ -55,6 +55,9 @@ public:
 	void print_ai_card_right(int right_card_num);
 	void Landlord_Card_Creat(int* card);
 
+	void clean_the_map();
+
+
 	//int endgame(Human human, Ai ai_1, Ai ai_2);
 
 
