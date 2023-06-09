@@ -20,7 +20,7 @@ public:
 	 int happy_beans_ ;
 	 int happy_numbers_ ;
 	 void double_happy_numbers();
-	 void evaluate_happy_beans(int happy_numbers, int happy_beans, int winner, int landlord);
+	 int evaluate_happy_beans(int happy_numbers, int happy_beans, int winner, int landlord);
 	 void print_happy_numbers_and_beans(int MapLength, int MapHeight, int happy_numbers, int happy_beans);
 	 void set_happy_beans(int happy_beans);
 	 void set_happy_numbers(int a);

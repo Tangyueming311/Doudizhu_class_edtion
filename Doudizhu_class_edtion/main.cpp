@@ -7,12 +7,13 @@
 #include "Human.h"
 #include "Ai.h"
 #include "Function.h"
+#include"log.h"
 using namespace std;
 int main()
 {
 
 	setConsoleFontSize(24);
-	HideCursor();
+	
 
 
 	Card card;
@@ -32,13 +33,91 @@ int main()
 
 	Sleep(1000);
 	Draw draw;
-	draw.menu();
+
+
+
+	int choose=draw.menu();
+    int happybenans[1] = { 0 }
+	;vector<User> users = readCSV("D:/doudizhu_user_csv/users.csv");	
+	Sleep(1000);
+	A a;
+	if (choose == 1) {
+		
+		int flag = 0;
+		while (1) {
+			int button;
+
+			if (flag == 0) {
+				button = a.choose_button_login();
+			}
+			else {
+				button = a.choose_button_sign();
+			}
+
+			if (button == 2 || button == 1) {
+				if (flag == 0) {
+					a.login_settle(button);
+				}
+				else {
+					a.sign_settle(button);
+				}
+
+			}
+			else if (button == 3) {
+				if (flag == 0) {
+					bool foundUser = searchUser(users, a.username, a.password, happybenans);
+					if (foundUser == true) {
+						gotoxy(a.MapLength / 2, 0);
+						cout << "登录成功";
+						break;
+					}
+					else {
+						gotoxy(a.MapLength / 2, 0);
+						cout << "账户名或密码错误";
+						Sleep(1000);
+						system("cls");
+
+					}
+				}
+				else {
+
+					User newUser(a.username, a.password, 3000);
+
+					users.push_back(newUser);
+
+					writeCSV("D:/doudizhu_user_csv/users.csv", users);
+					gotoxy(a.MapLength / 2, 0);
+					cout << "注册成功";
+					break;
+
+				}
+			}
+			else if (button == 4) {
+				if (flag == 0) {
+					flag = 1;
+					system("cls");
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				break;
+			}
+
+		}
+
+	}
+
+
+
+	HideCursor();
 	Human human;
 
 	Function function;
 
-	int unknow = 0;
-	human.set_happy_beans(unknow);
+	
+	human.set_happy_beans(happybenans[0]);
 	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, human.happy_beans_);
 
 
@@ -47,10 +126,10 @@ int main()
 	srand((unsigned)time(NULL));
 	int choosen_num = rand() % 3+1;
 
-	int a[1] = { 1 };
+	int ab[1] = { 1 };
 
-	int landlord = function.choose_if_landlord(human,a,draw,ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
-	human.set_happy_numbers(a[0]);
+	int landlord = function.choose_if_landlord(human,ab,draw,ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
+	human.set_happy_numbers(ab[0]);
 	card.set_lord_card(landlord);
 	
 
@@ -272,6 +351,11 @@ int main()
 		cout << " 农民赢力";
 	}
 
+
+	happybenans[0] = human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw, human, ai_1, ai_2), landlord);
+
+	searchUser_change(users, a.username, a.password, happybenans);
+	writeCSV("D:/doudizhu_user_csv/users.csv", users);
 
 	//human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw,human, ai_1, ai_2), landlord);
 

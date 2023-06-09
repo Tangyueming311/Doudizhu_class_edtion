@@ -1551,7 +1551,7 @@ void Player::print_happy_numbers_and_beans(int MapLength, int MapHeight, int hap
 
 }
 
-void Player::evaluate_happy_beans(int happy_numbers, int happy_beans, int winner, int landlord)
+int Player::evaluate_happy_beans(int happy_numbers, int happy_beans, int winner, int landlord)
 {
 	int change_happy_beans = 0;
 	if (landlord == 1 && winner == 1) {
@@ -1574,8 +1574,9 @@ void Player::evaluate_happy_beans(int happy_numbers, int happy_beans, int winner
 		happy_beans = happy_beans + change_happy_beans;
 	}
 
-
+	gotoxy(190 / 2, 55 / 2);
 	cout << change_happy_beans << "  " << "»¶ÀÖ¶¹Óà¶î" << happy_beans;
+	return happy_beans;
 
 }
 
