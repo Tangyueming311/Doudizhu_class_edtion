@@ -6,6 +6,8 @@
 
 extern int K_temp_card[15];
 extern int K_order;
+extern int K_temp_card_class_;
+
 
 class Player
 {
@@ -15,7 +17,7 @@ public:
 	 int temp_cards_[15];
 	 bool if_lord_;
 	 int order_of_play_;
-	 int temp_card_class_;
+	// int K_temp_card_class_;
 
 	 int happy_beans_ ;
 	 int happy_numbers_ ;

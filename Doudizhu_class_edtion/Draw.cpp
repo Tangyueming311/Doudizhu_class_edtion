@@ -895,7 +895,11 @@ void Draw::print_ai_card_left(int left_card_num) {
 	int temp_left_x = 5;
 	int temp_left_y = 8;
 
-
+	for (int i = temp_left_x-1; i < temp_left_x + temp_card_length+2; i++) {
+		for (int j = temp_left_y; j <= MapHeight; j++) {
+			map_matrix_[i][j] = '0';
+		}
+	}
 
 
 	//左边
@@ -926,7 +930,7 @@ void Draw::print_ai_card_left(int left_card_num) {
 	}
 
 
-	print(4, 8, temp_card_length + 2, (left_card_num - 1) * 2 + 6);
+	print(4, 8, temp_card_length + 2, (20 - 1) * 2 + 6);
 	gotoxy(13, temp_left_y + 1);
 	cout << left_card_num << "张";
 
@@ -945,6 +949,15 @@ void Draw::print_ai_card_right(int right_card_num)
 
 	int temp_right_x = MapLength - 5 - temp_card_length;
 	int temp_right_y = 8;
+
+
+	for (int i = temp_right_x-1; i < temp_right_x + temp_card_length+2; i++) {
+		for (int j = temp_right_y; j <= MapHeight; j++) {
+			map_matrix_[i][j] = '0';
+		}
+	}
+
+
 	while (num_right <= right_card_num) {
 		//先把牌所占空间清出来，赋0
 		for (int i = temp_right_x; i < temp_right_x + temp_card_length; i++) {
@@ -973,7 +986,7 @@ void Draw::print_ai_card_right(int right_card_num)
 
 	//Map[temp_left_x + 10][temp_left_y + 2] = left_card_num;
 
-	print(temp_right_x - 1, 8, temp_card_length + 2, (right_card_num - 1) * 2 + 6);
+	print(temp_right_x - 1, 8, temp_card_length + 2, (20 - 1) * 2 + 6);
 	gotoxy(MapLength - 13, temp_right_y + 1);
 	cout << right_card_num << "张";
 

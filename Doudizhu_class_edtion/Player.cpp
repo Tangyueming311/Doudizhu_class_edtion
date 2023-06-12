@@ -4,6 +4,7 @@ using namespace std;
 
 int K_temp_card[15] = { 0 };
 int K_order = 2;
+int K_temp_card_class_ = 0;
 
 void Player::set_handcards(int* handcards)
 {
@@ -12,6 +13,11 @@ void Player::set_handcards(int* handcards)
 		handcards_[i] = handcards[i];
 		
 	}	
+	for (int i = 0; i < 15; i++) {
+
+		temp_cards_[i] = 0;
+
+	}
 }
 
 int* Player::handcards()
@@ -80,7 +86,7 @@ bool Player::if_win_endgame(int* handcards)
 
 void Player::set_temp_card_class(int temp_card_class)
 {
-	temp_card_class_ = temp_card_class;
+	K_temp_card_class_ = temp_card_class;
 }
 
 int Player::card_num(int* card) {
@@ -114,14 +120,14 @@ int Player::first_chu_judge(int* a) {
 	}
 
 	if (num == 1) {
-		temp_card_class_ = 101;           //暂存值的牌的类型为单牌	
+		K_temp_card_class_ = 101;           //暂存值的牌的类型为单牌	
 		//	cout << "你打出了单牌\n";
 		return 1;
 	}
 
 	else if (num == 2) {
 		if (a[0] == a[1]) {
-			temp_card_class_ = 202;      //暂存值的牌的类型为对牌	
+			K_temp_card_class_ = 202;      //暂存值的牌的类型为对牌	
 			//		cout << "你打出了对牌\n";
 			return 1;
 		}
@@ -138,7 +144,7 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 3) {
 		if (a[0] == a[1] && a[1] == a[2]) {
-			temp_card_class_ = 1303;         //暂存值的牌的类型为三牌	
+			K_temp_card_class_ = 1303;         //暂存值的牌的类型为三牌	
 			//		cout << "你打出了三张一样的牌\n";
 			return 1;
 		}
@@ -150,13 +156,13 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 4) {
 		if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) {
-			temp_card_class_ = 1;         //暂存值的牌的类型为炸弹	
+			K_temp_card_class_ = 1;         //暂存值的牌的类型为炸弹	
 			double_happy_numbers();
 			//		cout << "你直接打出了炸弹！!!!\n";
 			return 1;
 		}
 		else if ((a[0] == a[1] && a[1] == a[2] && a[2] != a[3]) || (a[0] != a[1] && a[1] == a[2] && a[2] == a[3])) {
-			temp_card_class_ = 2104;          //暂存值的牌的类型为三带一
+			K_temp_card_class_ = 2104;          //暂存值的牌的类型为三带一
 			//		cout << "你打出了三带一\n";
 			return 1;
 		}
@@ -168,12 +174,12 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 5) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1105;         //暂存值的牌的类型为顺子-5	
+			K_temp_card_class_ = 1105;         //暂存值的牌的类型为顺子-5	
 			//		cout << "你打出了5张顺子\n";
 			return 1;
 		}
 		if (first_chu_judge_plane2(a)) {
-			temp_card_class_ = 2205;        //暂存值的牌的类型为 三带二
+			K_temp_card_class_ = 2205;        //暂存值的牌的类型为 三带二
 			//		cout << "你打出了三带一对\n";
 			return 1;
 		}
@@ -187,17 +193,17 @@ int Player::first_chu_judge(int* a) {
 
 
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1106;         //暂存值的牌的类型为顺子-6
+			K_temp_card_class_ = 1106;         //暂存值的牌的类型为顺子-6
 			//		cout << "你打出了6张顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1206;         //暂存值的牌的类型为双顺子-6
+			K_temp_card_class_ = 1206;         //暂存值的牌的类型为双顺子-6
 			//		cout << "你打出了6张的双顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi3(a)) {
-			temp_card_class_ = 1306;         //暂存值的牌的类型为三顺子-6
+			K_temp_card_class_ = 1306;         //暂存值的牌的类型为三顺子-6
 			//		cout << "你打出了6张的三顺子\n";
 			return 1;
 		}
@@ -209,7 +215,7 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 7) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1107;         //暂存值的牌的类型为顺子-7
+			K_temp_card_class_ = 1107;         //暂存值的牌的类型为顺子-7
 			//		cout << "你打出了7张顺子\n";
 			return 1;
 		}
@@ -221,17 +227,17 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 8) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1108;         //暂存值的牌的类型为顺子-8
+			K_temp_card_class_ = 1108;         //暂存值的牌的类型为顺子-8
 			//		cout << "你打出了8张顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1208;         //暂存值的牌的类型为双顺子-8
+			K_temp_card_class_ = 1208;         //暂存值的牌的类型为双顺子-8
 			//		cout << "你打出了8张的双顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_plane1(a)) {
-			temp_card_class_ = 2108;         //暂存值的牌的类型为飞机带单-8
+			K_temp_card_class_ = 2108;         //暂存值的牌的类型为飞机带单-8
 			//		cout << "你打出了8张的飞机带单\n";
 			return 1;
 		}
@@ -244,12 +250,12 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 9) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1109;         //暂存值的牌的类型为顺子-9
+			K_temp_card_class_ = 1109;         //暂存值的牌的类型为顺子-9
 			//		cout << "你打出了9张顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi3(a)) {
-			temp_card_class_ = 1309;         //暂存值的牌的类型为三顺子-9
+			K_temp_card_class_ = 1309;         //暂存值的牌的类型为三顺子-9
 			//		cout << "你打出了9张的三顺子\n";
 			return 1;
 		}
@@ -261,17 +267,17 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 10) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1110;         //暂存值的牌的类型为顺子-10
+			K_temp_card_class_ = 1110;         //暂存值的牌的类型为顺子-10
 			//		cout << "你打出了10张顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1210;         //暂存值的牌的类型为双顺子-10
+			K_temp_card_class_ = 1210;         //暂存值的牌的类型为双顺子-10
 			//		cout << "你打出了10张的双顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_plane2(a)) {
-			temp_card_class_ = 2210;         //暂存值的牌的类型为飞机带双-10
+			K_temp_card_class_ = 2210;         //暂存值的牌的类型为飞机带双-10
 			//		cout << "你打出了10张的飞机带双\n";
 			return 1;
 		}
@@ -283,7 +289,7 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 11) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1111;         //暂存值的牌的类型为顺子-11
+			K_temp_card_class_ = 1111;         //暂存值的牌的类型为顺子-11
 			//		cout << "你打出了11张顺子\n";
 			return 1;
 		}
@@ -295,22 +301,22 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 12) {
 		if (first_chu_judge_Shunzi1(a)) {
-			temp_card_class_ = 1112;         //暂存值的牌的类型为顺子-12
+			K_temp_card_class_ = 1112;         //暂存值的牌的类型为顺子-12
 			//		cout << "你打出了12张顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1212;         //暂存值的牌的类型为双顺子-12
+			K_temp_card_class_ = 1212;         //暂存值的牌的类型为双顺子-12
 			//		cout << "你打出了12张的双顺子\n";
 			return 1;
 		}
 		else if (first_chu_judge_plane1(a)) {
-			temp_card_class_ = 2112;         //暂存值的牌的类型为飞机带单-12
+			K_temp_card_class_ = 2112;         //暂存值的牌的类型为飞机带单-12
 			//		cout << "你打出了12张的飞机带单\n";
 			return 1;
 		}
 		else if (first_chu_judge_Shunzi3(a)) {
-			temp_card_class_ = 1312;         //暂存值的牌的类型为三顺子-12
+			K_temp_card_class_ = 1312;         //暂存值的牌的类型为三顺子-12
 			//		cout << "你打出了12张的三顺子\n";
 			return 1;
 		}
@@ -327,7 +333,7 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 14) {
 		if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1214;         //暂存值的牌的类型为双顺子-14
+			K_temp_card_class_ = 1214;         //暂存值的牌的类型为双顺子-14
 			//		cout << "你打出了14张的双顺子\n";
 			return 1;
 		}
@@ -339,13 +345,13 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 15) {
 		if (first_chu_judge_Shunzi3(a)) {
-			temp_card_class_ = 1315;          // 暂存值的牌的类型为三顺子 - 15
+			K_temp_card_class_ = 1315;          // 暂存值的牌的类型为三顺子 - 15
 			//		cout << "你打出了15张的三顺子\n";
 			return 1;
 		}
 
 		else if (first_chu_judge_plane2(a)) {
-			temp_card_class_ = 2215;         //暂存值的牌的类型为飞机带双-15
+			K_temp_card_class_ = 2215;         //暂存值的牌的类型为飞机带双-15
 			//		cout << "你打出了15张的飞机带双\n";
 			return 1;
 		}
@@ -358,13 +364,13 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 16) {
 		if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1216;          // 暂存值的牌的类型为双顺子 - 16
+			K_temp_card_class_ = 1216;          // 暂存值的牌的类型为双顺子 - 16
 			//		cout << "你打出了16张的双顺子牌\n";
 			return 1;
 		}
 
 		else if (first_chu_judge_plane1(a)) {
-			temp_card_class_ = 2116;         //暂存值的牌的类型为飞机带单-16
+			K_temp_card_class_ = 2116;         //暂存值的牌的类型为飞机带单-16
 			//		cout << "你打出了16张的飞机带单\n";
 			return 1;
 		}
@@ -381,13 +387,13 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 18) {
 		if (first_chu_judge_Shunzi3(a)) {
-			temp_card_class_ = 1318;          // 暂存值的牌的类型为三顺子 - 18
+			K_temp_card_class_ = 1318;          // 暂存值的牌的类型为三顺子 - 18
 			//		cout << "你打出了18张的三顺子\n";
 			return 1;
 		}
 
 		if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1218;          // 暂存值的牌的类型为双顺子 - 18
+			K_temp_card_class_ = 1218;          // 暂存值的牌的类型为双顺子 - 18
 			//		cout << "你打出了18张的双顺子\n";
 			return 1;
 		}
@@ -404,18 +410,18 @@ int Player::first_chu_judge(int* a) {
 
 	else if (num == 20) {
 		if (first_chu_judge_Shunzi2(a)) {
-			temp_card_class_ = 1220;          // 暂存值的牌的类型为双顺子 - 20
+			K_temp_card_class_ = 1220;          // 暂存值的牌的类型为双顺子 - 20
 			//		cout << "你打出了20张的双顺子\n";
 			return 1;
 		}
 
 		else if (first_chu_judge_plane1(a)) {
-			temp_card_class_ = 2120;         //暂存值的牌的类型为飞机带单-20
+			K_temp_card_class_ = 2120;         //暂存值的牌的类型为飞机带单-20
 			//		cout << "你打出了20张的飞机带单\n";
 			return 1;
 		}
 		else if (first_chu_judge_plane2(a)) {
-			temp_card_class_ = 2220;         //暂存值的牌的类型为飞机带双-20
+			K_temp_card_class_ = 2220;         //暂存值的牌的类型为飞机带双-20
 			//		cout << "你打出了20张的飞机带双\n";
 			return 1;
 		}
@@ -435,6 +441,10 @@ int Player::first_chu_judge(int* a) {
 
 
 }
+
+
+
+
 
 //单顺子判断（包括多个数量）
 //形参a为数组类型，为要打出的牌
@@ -620,6 +630,7 @@ int Player::first_chu_judge_plane1(int* b) {
 
 		}
 	}
+
 	if (temp == temp2 && temp1 == 1) {
 		return 1;
 	}
@@ -737,6 +748,8 @@ int Player::follow_chu_judge(int* a, int* b, int c)
 
 			//			cout << "炸弹压死！！！！" << endl;
 			double_happy_numbers();
+			K_temp_card_class_ = 1;
+
 			return 1;
 		}
 		else {
@@ -751,6 +764,8 @@ int Player::follow_chu_judge(int* a, int* b, int c)
 			//			cout << "王炸绝杀！！！！！"<<endl;
 			double_happy_numbers();
 			double_happy_numbers();
+			K_temp_card_class_ = 1;
+
 			return 1;
 		}
 		else {
@@ -859,11 +874,11 @@ int Player::follow_chu_judge(int* a, int* b, int c)
 		}
 
 		else if (num == 5) {
-			if (follow_chu_judge_plane1(a, b) == 0) {
+			if (follow_chu_judge_plane2(a, b) == 0) {
 				//				cout << "小了" << endl;
 				return 0;
 			}
-			else if (follow_chu_judge_plane1(a, b) == 1) {
+			else if (follow_chu_judge_plane2(a, b) == 1) {
 				//				cout << "三带一" << endl;
 				return 1;
 			}
@@ -1393,6 +1408,7 @@ int Player::follow_chu_judge_BoomCard(int* a, int* b) {
 	if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) {
 		if (a[0] > b[0]) {
 			double_happy_numbers();
+			K_temp_card_class_ = 1;
 			return 1;
 		}
 		else {
@@ -1555,16 +1571,16 @@ int Player::evaluate_happy_beans(int happy_numbers, int happy_beans, int winner,
 {
 	int change_happy_beans = 0;
 	if (landlord == 1 && winner == 1) {
-		change_happy_beans = 5 * 2 * happy_numbers;
+		change_happy_beans = 50 * 2 * happy_numbers;
 	}
 	else if (landlord == 1 && winner != 1) {
-		change_happy_beans = -5 * 2 * happy_numbers;
+		change_happy_beans = -50 * 2 * happy_numbers;
 	}
 	else if (landlord != 1 && winner == 1) {
-		change_happy_beans = 5 * happy_numbers;
+		change_happy_beans = 50 * happy_numbers;
 	}
 	else if (landlord != 1 && winner != 1) {
-		change_happy_beans = -5 * happy_numbers;
+		change_happy_beans = -50 * happy_numbers;
 	}
 
 	if ((change_happy_beans + happy_beans) < 0) {

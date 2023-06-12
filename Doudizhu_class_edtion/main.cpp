@@ -6,6 +6,7 @@
 #include "Card.h"
 #include "Human.h"
 #include "Ai.h"
+#include "AiYY.h"
 #include "Function.h"
 #include"log.h"
 using namespace std;
@@ -16,23 +17,52 @@ int main()
 	
 
 
-	Card card;
+	Card card;	Draw draw;
 	card.card();
 	card.washCard();
 	card.dealcard();
 	card.change_card_to_matrix();
 
-	Ai ai_1;
-	Ai ai_2;
+	AiYY ai_1;
+	AiYY ai_2;
+
+
+
+
+	
+
+
+
+
 
 	ai_1.set_handcards(card.matrix_part2_);
 	ai_2.set_handcards(card.matrix_part3_);
-	
+	ai_1.matrix_to_no_matrix();
+	ai_2.matrix_to_no_matrix();
+
+	ai_1.chai_pai();
+	ai_2.chai_pai();
+
+
+
+
+
+
 	ai_1.set_left_or_right(1);
-	ai_1.set_left_or_right(2);
+	ai_2.set_left_or_right(2);
 
 	Sleep(1000);
-	Draw draw;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,6 +99,7 @@ int main()
 					if (foundUser == true) {
 						gotoxy(a.MapLength / 2, 0);
 						cout << "登录成功";
+						Sleep(1000);
 						break;
 					}
 					else {
@@ -88,6 +119,7 @@ int main()
 					writeCSV("D:/doudizhu_user_csv/users.csv", users);
 					gotoxy(a.MapLength / 2, 0);
 					cout << "注册成功";
+					Sleep(1000);
 					break;
 
 				}
@@ -116,8 +148,13 @@ int main()
 
 	Function function;
 
-	
+	if (choose == 2) {
+		human.set_happy_beans(3000);
+	}
+	else if(choose==1){
 	human.set_happy_beans(happybenans[0]);
+	}
+
 	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, human.happy_beans_);
 
 
@@ -137,6 +174,14 @@ int main()
 	human.set_handcards(card.matrix_part1());
 	ai_1.set_handcards(card.matrix_part2_);
 	ai_2.set_handcards(card.matrix_part3_);
+	ai_1.matrix_to_no_matrix();
+	ai_2.matrix_to_no_matrix();
+
+	ai_1.chai_pai();
+	ai_2.chai_pai();
+
+
+
 
 	draw.Landlord_Card_Creat(card.landlord_);
 	draw.print_ai_card(ai_1.card_num(ai_1.handcards_), ai_2.card_num(ai_2.handcards_), landlord);
@@ -169,41 +214,57 @@ int main()
 				human.chu_card_first(draw);
 			}
 
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
+			//card.mark_card_change(K_temp_card, orign_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
-			Sleep(1000);
+			Sleep(2000);
+
+			int temp_K_order = K_order;
 
 			if (K_order == 0 || K_order == 1) {
-				ai_1.chu_card(draw);
+				ai_1.follow_chu(draw);
 			}
 			else {
 
-				ai_1.chu_card_first(draw);
+				ai_1.first_chu(draw);
+
+
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
+
+			if (temp_K_order == K_order|| temp_K_order == K_order+1) {
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
-			Sleep(1000);
+			Sleep(2000);
+
+			temp_K_order = K_order;
 
 			if (K_order == 0 || K_order == 1) {
-				ai_2.chu_card(draw);
+				ai_2.follow_chu(draw);
 			}
 			else {
 
-				ai_2.chu_card_first(draw);
+				ai_2.first_chu(draw);
+
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
-			Sleep(1000);
+			if (temp_K_order == K_order || temp_K_order == K_order + 1) {
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
+			Sleep(2000);
 
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
@@ -213,36 +274,48 @@ int main()
 		}
 		else if(landlord==2) {
 		
-
+			int temp_K_order = K_order;
 			if (K_order == 0 || K_order == 1) {
-				ai_1.chu_card(draw);
+				ai_1.follow_chu(draw);
 			}
 			else {
 
-				ai_1.chu_card_first(draw);
+				ai_1.first_chu(draw);
+
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
 
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
+			if (temp_K_order == K_order || temp_K_order == K_order + 1) {
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
 
-			Sleep(1000);
+			Sleep(2000);
+
+			temp_K_order = K_order;
 
 			if (K_order == 0 || K_order == 1) {
-				ai_2.chu_card(draw);
+				ai_2.follow_chu(draw);
 			}
 			else {
 
-				ai_2.chu_card_first(draw);
+				ai_2.first_chu(draw);
+
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
 
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
-			Sleep(1000);
+			if (temp_K_order == K_order || temp_K_order == K_order + 1) {
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
+			Sleep(2000);
 
 
 
@@ -261,9 +334,9 @@ int main()
 
 				human.chu_card_first(draw);
 			}
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
-			Sleep(1000);
+			//card.mark_card_change(K_temp_card, orign_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			Sleep(2000);
 
 
 
@@ -272,24 +345,28 @@ int main()
 			}
 		}
 		else if (landlord == 3) {
-
+			int temp_K_order = K_order;
 
 			if (K_order == 0 || K_order == 1) {
-				ai_2.chu_card(draw);
+				ai_2.follow_chu(draw);
 			}
 			else {
 
-				ai_2.chu_card_first(draw);
-			}
+				ai_2.first_chu(draw);
 
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
+			if (temp_K_order == K_order || temp_K_order == K_order + 1) {
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
 
-			Sleep(1000);
+			Sleep(2000);
 
 			if (K_order == 0 || K_order == 1) {
 				human.chu_card(draw);
@@ -299,63 +376,79 @@ int main()
 
 				human.chu_card_first(draw);
 			}
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
-			Sleep(1000);
+			//card.mark_card_change(K_temp_card,orign_card);
+			card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			Sleep(2000);
 
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
+			temp_K_order = K_order;
 
             if (K_order == 0 || K_order == 1) {
-				ai_1.chu_card(draw);
+				ai_1.follow_chu(draw);
 			}
 			else {
 
-				ai_1.chu_card_first(draw);
+				ai_1.first_chu(draw);
+
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
 			
-			card.mark_card_change(K_temp_card);
-			card.mark_card_print(draw.MapLength, draw.MapHeight, card.orign_card_matrix);
+			if (temp_K_order == K_order || temp_K_order == K_order + 1) {
+				card.mark_card_change(K_temp_card, orign_card);
+				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			}
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
-              Sleep(1000);
+              Sleep(2000);
 
 			
 		}
 
 
 	}
-
+	Sleep(3000);
 
 	if (function.endgame(draw,human, ai_1, ai_2) == 1&&landlord==1) {
-		cout << "地主赢力";
+		gotoxy(draw.MapLength / 2, draw.MapHeight/2);
+		cout << "玩家 地主赢力";
 	}
 	else if (function.endgame(draw, human, ai_1, ai_2) == 1 && landlord != 1) {
-		cout << " 农民赢力";
+		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
+		cout << "AI 1号 和 AI 2号 农民赢力";
 	}
 	else if (function.endgame(draw, human, ai_1, ai_2) == 2 && landlord == 2) {
-		cout << " 农民赢力";
+		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
+		cout << " AI 1号 地主赢力";
 	}
 	else if (function.endgame(draw, human, ai_1, ai_2) == 2 && landlord != 2) {
-		cout << " 农民赢力";
+		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
+		cout << " 玩家 和 AI 2号 农民赢力";
 	}
 	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord == 3) {
-		cout << " 农民赢力";
+		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
+		cout << " AI 2 号 地主赢力";
 	}
 	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord != 3) {
-		cout << " 农民赢力";
+		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
+		cout << " 玩家 AI 和 1号 农民赢力";
 	}
 
-
+	Sleep(2000);
 	happybenans[0] = human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw, human, ai_1, ai_2), landlord);
 
-	searchUser_change(users, a.username, a.password, happybenans);
-	writeCSV("D:/doudizhu_user_csv/users.csv", users);
+	if (choose == 1) {
+		searchUser_change(users, a.username, a.password, happybenans);
+		writeCSV("D:/doudizhu_user_csv/users.csv", users);
+	}
+
+	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, happybenans[0]);
 
 	//human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw,human, ai_1, ai_2), landlord);
 

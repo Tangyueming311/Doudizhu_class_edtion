@@ -108,6 +108,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <HeapReserveSize>1600000000</HeapReserveSize>
+      <HeapCommitSize>1600000000</HeapCommitSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="AiYY.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Function.cpp" />
@@ -138,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h" />
+    <ClInclude Include="AiYY.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="Function.h" />

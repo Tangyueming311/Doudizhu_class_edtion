@@ -5,7 +5,7 @@
 using namespace std;
 
 
-int Function::endgame(Draw draw ,Human human, Ai ai_1, Ai ai_2)
+int Function::endgame(Draw draw ,Human human, AiYY ai_1, AiYY ai_2)
 {
 	if (human.card_num(human.handcards_) == 0) {
 
@@ -27,7 +27,7 @@ int Function::endgame(Draw draw ,Human human, Ai ai_1, Ai ai_2)
 		return 0;
 	}
 }
-int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_2, int choosen_player, int card_y, int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction)
+int Function::choose_if_landlord(Human human ,int * a,Draw draw, AiYY ai_1, AiYY ai_2, int choosen_player, int card_y, int card_num, int* card, int orign_arrow, int buttons_number, int buttons_distance, int first_button_x, int first_button_y, int arrow_direction)
 {
 	draw.clean_the_map();
 	gotoxy(draw.MapLength / 2, 20);
@@ -67,7 +67,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 		}
 
 		Sleep(2000);
-		if (ai_1.choose_landord() == true) {
+		if (ai_1.if_grab_landlord() == true) {
 			landlord_player_2 = 1;
 			gotoxy(20, 20);
 			cout << "Ai 1：抢地主！";
@@ -82,7 +82,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 			cout << "Ai 1：不抢    ";
 		}
 		Sleep(2000);
-		if (ai_2.choose_landord() == true) {
+		if (ai_2.if_grab_landlord() == true) {
 			landlord_player_3 = 1;
 			gotoxy(draw.MapLength - 20, 20);
 			cout << "Ai 2：抢地主！";
@@ -160,7 +160,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 	}
 	if (choosen_player == 2) {
 
-		if (ai_1.choose_landord() == true) {
+		if (ai_1.if_grab_landlord() == true) {
 			landlord_player_2 = 1;
 			gotoxy(20, 20);
 			cout << "Ai 1：叫地主！";
@@ -176,7 +176,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 		}
 		Sleep(2000);
 
-		if (ai_2.choose_landord() == true) {
+		if (ai_2.if_grab_landlord() == true) {
 			landlord_player_3 = 1;
 			gotoxy(draw.MapLength - 20, 20);
 			cout << "Ai 2：抢地主！";
@@ -218,7 +218,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 
 
 
-			if (ai_1.choose_landord() == true) {
+			if (ai_1.if_grab_landlord() == true) {
 				gotoxy(20, 20);
 				cout << "Ai 1：再抢！  ";
 				a[0] = a[0] * 2;
@@ -265,7 +265,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 
 	}
 	if (choosen_player == 3) {
-		if (ai_2.choose_landord() == true) {
+		if (ai_2.if_grab_landlord() == true) {
 			landlord_player_3 = 1;
 			gotoxy(draw.MapLength - 20, 20);
 			cout << "Ai 2：叫地主！";
@@ -302,7 +302,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 		}
 		Sleep(2000);
 
-		if (ai_1.choose_landord() == true) {
+		if (ai_1.if_grab_landlord() == true) {
 			landlord_player_2 = 1;
 			gotoxy(20, 20);
 			cout << "Ai 1：抢地主！";
@@ -326,7 +326,7 @@ int Function::choose_if_landlord(Human human ,int * a,Draw draw, Ai ai_1, Ai ai_
 
 
 
-			if (ai_2.choose_landord() == true) {
+			if (ai_2.if_grab_landlord() == true) {
 				gotoxy(draw.MapLength - 20, 20);
 				cout << "Ai 2：再抢！   ";
 				a[0] = a[0] * 2;

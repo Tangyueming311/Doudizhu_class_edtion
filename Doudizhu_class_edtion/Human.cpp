@@ -5,12 +5,19 @@ using namespace std;
 
 void Human::chu_card(Draw draw) {
 
-
+	gotoxy(27, 10);
+	cout << "              ";
+	gotoxy(draw.MapLength - 32, draw.MapHeight / 2);
+	cout << "    ";
+	gotoxy(27, draw.MapHeight / 2);
+	cout << "    ";
+	gotoxy(draw.MapLength - 40, 10);
+	cout << "                 ";
 	int card_number = card_num(handcards_);
 	int all_card_long = (card_number - 1) * draw.between_cards_Length + draw.cardLength;
 	int clean_all_card_long = (20 - 1) * draw.between_cards_Length + draw.cardLength;
 
-	for (int i = draw.MapLength / 2 - clean_all_card_long / 2 - 4; i < draw.MapLength / 2 + all_card_long / 2; i++) {
+	for (int i = draw.MapLength / 2 - clean_all_card_long / 2 - 4; i < draw.MapLength / 2 + clean_all_card_long / 2; i++) {
 		gotoxy(i, draw.MapHeight - 15);
 		putchar(' ');
 	}
@@ -122,8 +129,24 @@ void Human::chu_card(Draw draw) {
 
 void Human::chu_card_first(Draw draw) {
 
+	gotoxy(27, 10);
+	cout << "              ";
+	gotoxy(draw.MapLength - 32, draw.MapHeight / 2);
+	cout << "    ";
+	gotoxy(27, draw.MapHeight / 2);
+	cout << "    ";
+	gotoxy(draw.MapLength - 40, 10);
+	cout << "                 ";
+
 	int card_number = card_num(handcards_);
 	int all_card_long = (card_number - 1) * draw.between_cards_Length + draw.cardLength;
+	int clean_all_card_long= (20 - 1) * draw.between_cards_Length + draw.cardLength;
+
+	for (int i = draw.MapLength / 2 - clean_all_card_long / 2 - 4; i < draw.MapLength / 2 + clean_all_card_long / 2; i++) {
+		gotoxy(i, draw.MapHeight - 15);
+		putchar(' ');
+	}
+
 
 	gotoxy(draw.MapLength / 2 - all_card_long / 2 - 4, draw.MapHeight - 15);
 	cout << "²»³ö";

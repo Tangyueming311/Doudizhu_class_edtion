@@ -56,10 +56,10 @@ void Card::set_lord_card(int num)
 	
 }
 
-void Card::mark_card_change(int* K_temp_card)
+void Card::mark_card_change(int* K_temp_card,int* orign_card)
 {
 	for (int i = 0; i < 15; i++) {
-		orign_card_matrix[i] = orign_card_matrix[i] - K_temp_card[i];
+		orign_card[i] = orign_card[i] - K_temp_card[i];
 	}
 }
 
@@ -141,9 +141,9 @@ void Card::mark_card_print(int MapLength,int MapHeight,int *orign_card)
 	gotoxy(MapLength + 19, 21);
 	putchar('2');
 	gotoxy(MapLength + 23, 21);
-	putchar('B');
-	gotoxy(MapLength + 27, 21);
 	putchar('S');
+	gotoxy(MapLength + 27, 21);
+	putchar('B');
 
 	gotoxy(MapLength + 11, 14);
 	cout << orign_card[0];
@@ -173,6 +173,7 @@ void Card::mark_card_print(int MapLength,int MapHeight,int *orign_card)
 	cout << orign_card[11] ;
 	gotoxy(MapLength + 19, 24);
 	cout << orign_card[12] ;
+
 	gotoxy(MapLength + 23, 24);
 	cout << orign_card[13] ;
 	gotoxy(MapLength + 27, 24);
