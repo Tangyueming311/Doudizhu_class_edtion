@@ -67,8 +67,13 @@ int main()
 
 
 	int choose=draw.menu();
-    int happybenans[1] = { 0 }
-	;vector<User> users = readCSV("D:/doudizhu_user_csv/users.csv");	
+	int happybenans[1] = { 0 };
+
+	vector<User> users = readCSV("D:/doudizhu_user_csv/users.csv");	
+
+
+	
+
 	Sleep(1000);
 	A a;
 	if (choose == 1) {
@@ -97,13 +102,13 @@ int main()
 				if (flag == 0) {
 					bool foundUser = searchUser(users, a.username, a.password, happybenans);
 					if (foundUser == true) {
-						gotoxy(a.MapLength / 2, 0);
+						gotoxy(a.MapLength / 2, 10);
 						cout << "登录成功";
 						Sleep(1000);
 						break;
 					}
 					else {
-						gotoxy(a.MapLength / 2, 0);
+						gotoxy(a.MapLength / 2, 10);
 						cout << "账户名或密码错误";
 						Sleep(1000);
 						system("cls");
@@ -167,6 +172,9 @@ int main()
 
 	int landlord = function.choose_if_landlord(human,ab,draw,ai_1, ai_2, choosen_num, draw.MapHeight / 2, 17, card.matrix_part1(), 1, 2, 20, draw.MapLength / 2 - 10, draw.MapHeight / 2 + 20);
 	human.set_happy_numbers(ab[0]);
+	ai_1.set_happy_numbers(1);
+	ai_2.set_happy_numbers(1);
+
 	card.set_lord_card(landlord);
 	
 
@@ -188,6 +196,7 @@ int main()
 	draw.basic_print_handcard(draw.MapHeight - 10, human.card_num(human.handcards_), human.handcards_);
 
 
+
 	int orign_card[15] = { 0 };
 	for (int i = 0; i < 15; i++) {
 		orign_card[i] = card.orign_card_matrix[i];
@@ -197,9 +206,9 @@ int main()
 
 
 	///
-	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, human.happy_beans_);
+	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_*ai_1.happy_numbers_*ai_2.happy_numbers_, human.happy_beans_);
 
-
+	Sleep(2000);
 
 
 	//游戏进程
@@ -217,11 +226,13 @@ int main()
 			//card.mark_card_change(K_temp_card, orign_card);
 			card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
+
+			Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
-			Sleep(2000);
 
 			int temp_K_order = K_order;
 
@@ -242,11 +253,13 @@ int main()
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
 
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_ * ai_1.happy_numbers_ * ai_2.happy_numbers_, human.happy_beans_);
+
+			Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
-			Sleep(2000);
 
 			temp_K_order = K_order;
 
@@ -264,9 +277,10 @@ int main()
 				card.mark_card_change(K_temp_card, orign_card);
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
-			Sleep(2000);
+			
 
-
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_ * ai_1.happy_numbers_ * ai_2.happy_numbers_, human.happy_beans_);
+          Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
@@ -290,13 +304,14 @@ int main()
 				card.mark_card_change(K_temp_card, orign_card);
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
-
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_ * ai_1.happy_numbers_ * ai_2.happy_numbers_, human.happy_beans_);
+		     Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
 
-			Sleep(2000);
+	
 
 			temp_K_order = K_order;
 
@@ -315,11 +330,12 @@ int main()
 				card.mark_card_change(K_temp_card, orign_card);
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
-			Sleep(2000);
+			
 
 
 
-
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
+            Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
@@ -336,6 +352,8 @@ int main()
 			}
 			//card.mark_card_change(K_temp_card, orign_card);
 			card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
+
 			Sleep(2000);
 
 
@@ -361,12 +379,16 @@ int main()
 				card.mark_card_change(K_temp_card, orign_card);
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
+
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
+	         Sleep(2000);
+
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
 
 
-			Sleep(2000);
+		
 
 			if (K_order == 0 || K_order == 1) {
 				human.chu_card(draw);
@@ -378,6 +400,9 @@ int main()
 			}
 			//card.mark_card_change(K_temp_card,orign_card);
 			card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
+
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
+
 			Sleep(2000);
 
 
@@ -398,15 +423,18 @@ int main()
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
 			
+			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
+
 			if (temp_K_order == K_order || temp_K_order == K_order + 1) {
 				card.mark_card_change(K_temp_card, orign_card);
 				card.mark_card_print(draw.MapLength, draw.MapHeight, orign_card);
 			}
 
+          Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
 				break;
 			}
-              Sleep(2000);
+             
 
 			
 		}
@@ -441,14 +469,26 @@ int main()
 	}
 
 	Sleep(2000);
-	happybenans[0] = human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw, human, ai_1, ai_2), landlord);
+	happybenans[0] = human.evaluate_happy_beans(human.happy_numbers_ * ai_1.happy_numbers_ * ai_2.happy_numbers_, human.happy_beans_, function.endgame(draw, human, ai_1, ai_2), landlord);
 
 	if (choose == 1) {
-		searchUser_change(users, a.username, a.password, happybenans);
+	
+
+
+		for (int i = 0; i < users.size(); i++) {
+			if (users[i].username == "user1" && users[i].password == "123456") {
+				users[i].happyBeans = happybenans[0];
+
+			}
+		}
+
+
 		writeCSV("D:/doudizhu_user_csv/users.csv", users);
+
+
 	}
 
-	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_, happybenans[0]);
+	human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, happybenans[0]);
 
 	//human.evaluate_happy_beans(human.happy_numbers_, human.happy_beans_, function.endgame(draw,human, ai_1, ai_2), landlord);
 

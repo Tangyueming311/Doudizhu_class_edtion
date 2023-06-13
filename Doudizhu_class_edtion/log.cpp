@@ -541,7 +541,7 @@ vector<User> readCSV(string filename) {
 					user.password = value;
 				}
 				else {
-					user.happyBeans = stoi(value);
+					user.happyBeans = atoi(value.c_str());
 				}
 				pos = nextPos + 1;
 			}

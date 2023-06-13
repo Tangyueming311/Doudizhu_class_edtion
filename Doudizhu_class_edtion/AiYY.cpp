@@ -1225,6 +1225,7 @@ void AiYY::follow_chu(Draw draw)
 				sort(zhadan, zhadan + 20);
 				order3(zhadan);
 				flag3 = 1;
+				double_happy_numbers();
 				chu_card(draw);
 				//Ai_Right_Chu(temp, get_handCard_num_());
 				//Ai_Right_Buchu(draw);
