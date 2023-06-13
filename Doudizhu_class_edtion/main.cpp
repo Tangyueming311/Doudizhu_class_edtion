@@ -230,6 +230,8 @@ int main()
 
 			Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -257,6 +259,8 @@ int main()
 
 			Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -282,6 +286,8 @@ int main()
 			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_ * ai_1.happy_numbers_ * ai_2.happy_numbers_, human.happy_beans_);
           Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -307,6 +313,8 @@ int main()
 			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_ * ai_1.happy_numbers_ * ai_2.happy_numbers_, human.happy_beans_);
 		     Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -337,6 +345,8 @@ int main()
 			human.print_happy_numbers_and_beans(draw.MapLength, draw.MapHeight, human.happy_numbers_* ai_1.happy_numbers_* ai_2.happy_numbers_, human.happy_beans_);
             Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -359,6 +369,8 @@ int main()
 
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 		}
@@ -384,6 +396,8 @@ int main()
 	         Sleep(2000);
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -407,6 +421,8 @@ int main()
 
 
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
 
@@ -432,6 +448,8 @@ int main()
 
           Sleep(2000);
 			if (function.endgame(draw, human, ai_1, ai_2) != 0) {
+
+				Sleep(2000);
 				break;
 			}
              
@@ -441,13 +459,13 @@ int main()
 
 
 	}
-	Sleep(3000);
+	Sleep(1000);
 
 	if (function.endgame(draw,human, ai_1, ai_2) == 1&&landlord==1) {
 		gotoxy(draw.MapLength / 2, draw.MapHeight/2);
 		cout << "玩家 地主赢力";
 	}
-	else if (function.endgame(draw, human, ai_1, ai_2) == 1 && landlord != 1) {
+	else if (function.endgame(draw, human, ai_1, ai_2)!= 1 && landlord == 1) {
 		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
 		cout << "AI 1号 和 AI 2号 农民赢力";
 	}
@@ -455,17 +473,17 @@ int main()
 		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
 		cout << " AI 1号 地主赢力";
 	}
-	else if (function.endgame(draw, human, ai_1, ai_2) == 2 && landlord != 2) {
+	else if (function.endgame(draw, human, ai_1, ai_2) != 2 && landlord == 2) {
 		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
 		cout << " 玩家 和 AI 2号 农民赢力";
 	}
-	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord == 3) {
+	else if (function.endgame(draw, human, ai_1, ai_2) != 3 && landlord == 3) {
 		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
 		cout << " AI 2 号 地主赢力";
 	}
-	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord != 3) {
+	else if (function.endgame(draw, human, ai_1, ai_2) == 3 && landlord == 3) {
 		gotoxy(draw.MapLength / 2, draw.MapHeight / 2);
-		cout << " 玩家 AI 和 1号 农民赢力";
+		cout << " 玩家 和 AI 1号 农民赢力";
 	}
 
 	Sleep(2000);
