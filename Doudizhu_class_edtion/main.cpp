@@ -459,7 +459,7 @@ int main()
 
 
 	}
-	Sleep(1000);
+	//Sleep(1000);
 
 	if (function.endgame(draw,human, ai_1, ai_2) == 1&&landlord==1) {
 		gotoxy(draw.MapLength / 2, draw.MapHeight/2);

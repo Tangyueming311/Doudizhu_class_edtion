@@ -413,7 +413,7 @@ void AiYY::RocketCard(Draw draw )
 	sort(handcard, handcard + 20);
 	for (int i = 0; i < 20; i++)
 	{
-		temp[0] = 0;
+		temp[i] = 0;
 
 	}
 	temp[0] = 16;
